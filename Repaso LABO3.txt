@@ -1,2 +1,163 @@
+ESTRUCTURA DE PROYECTO GUESS NUMBER:
+Dominios: 
+-Users
+-Matches
+
+Capas: 
+FRONT
+-1 Controllers  API
+-2 Services 
+-3 Repository
+DB
+
+Capas Api a BD:
+Controllers(Metodos tipo ResponseEntity(DTOs))
+
+Controllers-Services(Devuel Models(BACK, Logica de Negocio))
+@Autowired service, inyeccion dependencias
+
+Services-Repository(extiende JPAReposirty<Entity,Tipo IdEntity>) 
+@Autowired repository, inyeccion dependencias
+
+-------------------------------------------------------
 Crear Proyecto de initializr
 
+https://start.spring.io/
+
+Opciones a Marcar
+
+Metadata: 
+Group: nombre de la organizacion , en la facu usa: ar.edu.utn.tup.lc.iii
+Artifac: nombre de proyecto 
+Name: --
+Descripcion: --
+Packaname: borra scafoldin
+
+Paquetes: 
+Lombok
+H2
+Web 
+JpA
+
+Packaging JAR
+Java 17
+
+PASOS
+1-Abrir carpeta nombre proyecto
+2-Copiar archivos zip y pegar en el carpeta del proyecto.
+3- OK ADD
+4- Ctrl  + S
+5-Load MAVEN proyect,cerca de la hora  sino se hace CAMPANITA> LOAD MAVEN PROYECT
+
+--------------------------------------------------------------------------------------------------
+Proyecto:
+
+Renombrar Aplication de proyecto: src>java> I/O Archivo color azul > shit f6 ,renombrar > select all(tambien renombrar los test) > ok > Ejecutar Proyecto
+
+PASO 1 
+1-Crear Directorios > Ver Imagen Directorio Ojo no es dentro del  sino la carpteta que contiene la Aplication/ICONO AZUL
+
+Archivos
+Ver ANOTACIONES DE CADA ARCHIVO
+
+Interfaces: Repository(nombreRepository) y Service(nommbreService) 
+Clases: model(Solo es el nombre), Dto(nombreDto),ServiceImpl(nommbreServiceImpl) y Controller(nombreController)
+
+Conceptos: 
+Extends: para Heredar clase
+Implements: para Implementar interface
+
+------------------------------------------------------------------------------------------
+Controller
+Sus metodos son TIPO ResponseEntity<AlgoDto>
+Usan List<Model>(GET All), Model variable(PUT y POST) , void(DELETE)
+
+
+Response<Entity>: clase simil HttpResponse 
+
+-Inyectar dependencias : Iservice
+@Autowired
+private DummyService service;
+
+
+
+-Anotaciones:
+@RestController: indica que es un rest controller
+@RequestMapping("/dummy"): sirver la url 
+@Autowired : permite la inyeccion de dependencias
+/CRUD
+@GetMapping("")
+@GetMapping("{id}"): select , puede recibir por body por el path
+Ejemplo: para pasar al path
+@RequestMapping("/owners/{ownerId}")
+public class OwnerController {
+
+	@GetMapping("/pets/{petId}")
+	public Pet findPet(@PathVariable Long ownerId, @PathVariable Long petId) {
+		// ...
+	}
+}
+
+@PostMapping(""): insert
+@PutMapping(""):update
+@DeleteMapping(""): delete
+@PathVariable: variable que toma por el path 
+-----------------------------------------------------------
+Service
+Funcion:Une controller con Repository
+Sus metodos son TIPO ResponseEntity<Model>
+
+implements  AlgoService
+
+-Inyectar dependencias : AlgoRepository
+@Autowired
+    private DummyRepository dummyRepository;
+	
+
+Anotaciones:
+@Service: indicar service
+
+
+----------------------------------------------------------
+Repository
+Funcion: da acceso a BD
+
+extends  JPAReposirty<Cual es la Entidad,Tipo de Dato>
+Puede implemetar todos los metodos de JPAReposirty
+
+JPAReposirty<AlgoEntity,Tipo de Dato>
+
+Anotaciones:
+@Repository: indicar repository, da acceso a BD
+
+---------------------------------------------------------
+Entity
+
+Anotaciones:
+@Entity: indicar entity, 
+@Id: tipo id
+@GeneratedValue(strategy = GenerationType.IDENTITY): valor auto incremental
+@Column(name = "id",nullable = false): nombre columna id, no acepta nulos 
+
+--------------------------------------------------------------------------------------
+PASO 2
+1-Crear package Config
+2-Agregar Clases Mapper Config y SpringDocConfig
+3-En lo que esta en rojo Click Der>Add Maven Dependency y Agregar Dependencia En POM 
+
+		ModelMapper
+		<dependency>
+			<groupId>org.modelmapper</groupId>
+			<artifactId>modelmapper</artifactId>
+			<version>3.1.1</version>
+		</dependency>
+		
+		OPEN API
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>2.5.0</version>
+		</dependency>
+		
+Biblioteca MAVEN:
+https://mvnrepository.com/
