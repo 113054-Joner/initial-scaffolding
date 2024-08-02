@@ -161,3 +161,11 @@ PASO 2
 		
 Biblioteca MAVEN:
 https://mvnrepository.com/
+
+CREAR REPO TEMPLATE
+Setting > Template-Repository
+
+----------------------------------------------------------------------------------------
+PROYECTO CON INITIAL SCAFOLDING 
+
+Crear Repo> Repository template(initial Scafoldin)
